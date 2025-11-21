@@ -607,8 +607,8 @@
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
-        <name>name</name>
-        <field>name</field>
+        <name>symbol</name>
+        <field>symbol</field>
         <condition>=</condition>
         <name2/>
       </key>
@@ -655,7 +655,7 @@
       <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
-        <name>timestamp</name>
+        <name>full_timestamp</name>
         <field>full_timestamp</field>
         <condition>=</condition>
         <name2/>
@@ -677,6 +677,57 @@
     </remotesteps>
     <GUI>
       <xloc>624</xloc>
+      <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Replace in string</name>
+    <type>ReplaceString</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>chg_24h</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>?</replace_string>
+        <replace_by_string/>
+        <set_empty_string>Y</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+      <field>
+        <in_stream_name>chg_7d</in_stream_name>
+        <out_stream_name/>
+        <use_regex>no</use_regex>
+        <replace_string>?</replace_string>
+        <replace_by_string/>
+        <set_empty_string>Y</set_empty_string>
+        <replace_field_by_string/>
+        <whole_word>no</whole_word>
+        <case_sensitive>no</case_sensitive>
+        <is_unicode>no</is_unicode>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>272</xloc>
       <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
@@ -731,6 +782,10 @@
       </field>
       <field>
         <name>chg_7d</name>
+        <rename/>
+      </field>
+      <field>
+        <name>full_timestamp</name>
         <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
@@ -880,6 +935,23 @@
         <length>-2</length>
         <precision>-2</precision>
         <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>full_timestamp</name>
+        <rename>full_timestamp</rename>
+        <type>Date</type>
+        <length>-2</length>
+        <precision>-2</precision>
+        <conversion_mask>yyyy/MM/dd HH:mm:ss</conversion_mask>
         <date_format_lenient>false</date_format_lenient>
         <date_format_locale/>
         <date_format_timezone/>
@@ -1194,8 +1266,8 @@
       </field>
       <field>
         <name>full_timestamp</name>
-        <type>String</type>
-        <format/>
+        <type>Date</type>
+        <format>yyyy/MM/dd HH:mm:ss</format>
         <currency>$</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1397,6 +1469,10 @@
         <column_name>asset_id</column_name>
         <stream_name>asset_id</stream_name>
       </field>
+      <field>
+        <column_name>segment_id</column_name>
+        <stream_name>segment_id</stream_name>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1548,6 +1624,17 @@
         <precision>4</precision>
         <trim_type>none</trim_type>
       </field>
+      <field>
+        <name>full_timestamp</name>
+        <type>Date</type>
+        <format>yyyy/MM/dd HH:mm:ss</format>
+        <currency/>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -1559,57 +1646,6 @@
     </remotesteps>
     <GUI>
       <xloc>112</xloc>
-      <yloc>400</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Replace in string</name>
-    <type>ReplaceString</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>chg_24h</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>?</replace_string>
-        <replace_by_string/>
-        <set_empty_string>Y</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-      <field>
-        <in_stream_name>chg_7d</in_stream_name>
-        <out_stream_name/>
-        <use_regex>no</use_regex>
-        <replace_string>?</replace_string>
-        <replace_by_string/>
-        <set_empty_string>Y</set_empty_string>
-        <replace_field_by_string/>
-        <whole_word>no</whole_word>
-        <case_sensitive>no</case_sensitive>
-        <is_unicode>no</is_unicode>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>272</xloc>
       <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
